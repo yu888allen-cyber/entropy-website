@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熵之刀砧 - 用新思維守護家人</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
+                    colors: {
+                        copper: { light: '#e8b488', DEFAULT: '#b87333', dark: '#8b5a2b' },
+                        warm: '#faf6f3'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        /* 升級版：滿版圖片 + 深色沉穩漸層遮罩 */
+        .hero-bg {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.85)), url('images/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        /* 手機版關閉 fixed attachment（iOS 不支援） */
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        @keyframes sweep {
+            0%    {opacity: 0; margin-top: -10px}
+            100%  {opacity: 1; margin-top: 0px}
+        }
+        .video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            max-width: 100%; background: #000; border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .video-container iframe, .video-container video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-warm">
+
+    <!-- ===== HEADER / NAV ===== -->
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="text-xl font-black text-copper-dark tracking-wider">熵之刀砧</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#entropy" class="text-gray-600 hover:text-copper font-medium transition">什麼是熵？</a>
+                <a href="#expert" class="text-gray-600 hover:text-copper font-medium transition">專家背書</a>
+                <a href="#products" class="text-gray-600 hover:text-copper font-medium transition">產品介紹</a>
+                <a href="#comparison" class="text-gray-600 hover:text-copper font-medium transition">材質比較</a>
+                <a href="#faq" class="text-gray-600 hover:text-copper font-medium transition">常見問題</a>
+            </div>
+            <a href="#cta" class="bg-copper text-white px-6 py-2 rounded-full font-bold hover:bg-copper-dark transition shadow-lg">立即選購</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero-bg pt-40 pb-32 px-4 text-center relative flex flex-col justify-center min-h-[85vh]">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="inline-block bg-white/10 backdrop-blur-sm text-copper-light font-medium px-5 py-1.5 rounded-full text-sm mb-6 border border-white/20">
+                🏆 台灣清華大學葉均蔚院士・高熵合金之父・1995年發明
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-widest drop-shadow-lg">
+                <span class="text-copper-light">熵</span>之刀砧
+            </h1>
+            <p class="text-2xl md:text-3xl text-gray-200 font-light mb-12 tracking-wide drop-shadow-md">
+                低碳・節能・健康・安全・環保——世代的傳家寶
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2.5 rounded-full shadow-lg font-medium"><i class="fa-solid fa-shield-virus text-copper-light mr-2"></i>抗菌率 99.999%</span>
+                <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2.5 rounded-full shadow-lg font-medium"><i class="fa-solid fa-fire-extinguisher text-copper-light mr-2"></i>安全無火花</span>
+                <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2.5 rounded-full shadow-lg font-medium"><i class="fa-solid fa-leaf text-copper-light mr-2"></i>無鈹・無毒・無塑膠</span>
+                <span class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2.5 rounded-full shadow-lg font-medium"><i class="fa-solid fa-snowflake text-copper-light mr-2"></i>快速解凍</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 什麼是熵？ ===== -->
+    <section id="entropy" class="py-20 bg-white px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">「熵」是什麼？一分鐘輕鬆讀懂</h2>
+            <div class="bg-warm border border-copper-light/30 rounded-2xl p-8 shadow-sm text-left mb-12">
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    <strong>熵（ㄕㄤ，讀音同「商」）</strong>，是熱力學中描述「混亂程度」的物理量。1995 年，清華大學葉均蔚教授逆向思考：<em class="text-copper-dark">「如果我把多種金屬元素，用幾乎等量的比例混合，會發生什麼？」</em>
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    過去科學界認為這樣只會得到一堆脆裂的廢料，但葉教授的實驗推翻了這個迷思——多元素帶來的「高混亂度（高熵效應）」，反而讓金屬彼此牽制融合，產生出<strong>超乎尋常的硬度、韌性、抗腐蝕與抗菌能力</strong>。
+                </p>
+                <div class="bg-white p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
+                    <p class="mb-2"><i class="fa-solid fa-circle-info text-copper mr-2"></i><strong>材料學精確定義：</strong></p>
+                    <p>嚴格依 IUPAC 定義，高熵合金需 5 種以上主元素。本產品以銅為主元素，多元素強化，融入高熵設計概念，依嚴格定義屬<strong>中熵合金 (Medium-Entropy Alloy)</strong>，但完美具備了高熵觀念的本質強效抗菌特性。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 影片段 ===== -->
+    <section id="video" class="py-20 bg-gray-900 px-4 text-center relative">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-4">《熵之道》：高熵之父的研發哲學</h2>
+            <p class="text-gray-400 mb-10">「多元、包容、和諧、共創，才能造就永續的未來。」</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/sfG160w9oIA" title="熵之道 — 高熵之父的研發哲學" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 專家背書 ===== -->
+    <section id="expert" class="py-20 bg-gray-50 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16">來自頂尖科學的廚房革命</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div class="flex items-center mb-6">
+                        <img src="images/professor.jpg" alt="葉均蔚院士" class="w-20 h-20 rounded-full object-cover mr-6 shadow-md border-2 border-copper-light">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-900">葉均蔚 院士</h3>
+                            <p class="text-copper font-medium">高熵合金之父 (1995年發明)</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-700">
+                        <li><i class="fa-solid fa-award text-copper mr-2"></i> <strong>2025 總統科學獎</strong>・工程科學組得主</li>
+                        <li><i class="fa-solid fa-globe text-copper mr-2"></i> 全球前 2% 頂尖科學家</li>
+                        <li><i class="fa-solid fa-book-open text-copper mr-2"></i> 權威期刊《Nature》特別專訪</li>
+                    </ul>
+                </div>
+                
+                <div class="rounded-2xl overflow-hidden shadow-lg h-full relative group">
+                    <img src="images/scene-food.jpg" alt="料理情境" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">守護家人的每一餐</h3>
+                        <p class="text-gray-200 text-sm">安心備料，從選擇正確的材質開始。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 材料科技 ===== -->
+    <section id="material" class="py-20 bg-white px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">世界級的「高熵銅合金」</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">告別艱澀的工業術語，我們將最純粹的健康與安全帶入您的廚房。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-warm p-6 rounded-xl shadow-sm text-center border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-copper-light/20 text-copper rounded-full flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-martini-glass-citrus"></i></div>
+                    <h4 class="font-bold text-lg mb-2">雞尾酒效應</h4>
+                    <p class="text-gray-600 text-sm">多種元素完美調和，創造出超乎尋常的強韌與耐用度。</p>
+                </div>
+                <div class="bg-warm p-6 rounded-xl shadow-sm text-center border border-gray-50 relative overflow-hidden">
+                    <div class="w-16 h-16 mx-auto bg-copper-light/20 text-copper rounded-full flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-viruses"></i></div>
+                    <h4 class="font-bold text-lg mb-2">本質抗菌 99.999%</h4>
+                    <p class="text-gray-600 text-sm mb-3">非表面塗層！材質本身即具備永久強效抑菌能力。</p>
+                    <div class="flex flex-wrap justify-center gap-1">
+                        <span class="text-[10px] bg-red-100 text-red-700 px-2 py-1 rounded">大腸桿菌</span>
+                        <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-1 rounded">金黃球菌</span>
+                        <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded">綠膿桿菌</span>
+                        <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-1 rounded">沙門氏菌</span>
+                    </div>
+                </div>
+                <div class="bg-warm p-6 rounded-xl shadow-sm text-center border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-copper-light/20 text-copper rounded-full flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-file-contract"></i></div>
+                    <h4 class="font-bold text-lg mb-2">SGS 第三方驗證</h4>
+                    <p class="text-gray-600 text-sm">通過嚴格檢驗，確保防霉、抗菌與食品接觸安全性。</p>
+                </div>
+                <div class="bg-warm p-6 rounded-xl shadow-sm text-center border border-gray-50">
+                    <div class="w-16 h-16 mx-auto bg-copper-light/20 text-copper rounded-full flex items-center justify-center text-2xl mb-4"><i class="fa-solid fa-xmark"></i></div>
+                    <h4 class="font-bold text-lg mb-2">無毒無鈹優勢</h4>
+                    <p class="text-gray-600 text-sm">保證不含劇毒「鈹」，不產生微塑膠，徹底守護食安。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 產品介紹 ===== -->
+    <section id="products" class="py-20 bg-gray-50 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16">專為現代家庭打造的神兵利器</h2>
+
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <!-- 熵之廚刀 -->
+                <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-lg flex flex-col">
+                    <h3 class="text-2xl font-black text-copper-dark border-b-2 border-copper inline-block pb-2 mb-6 self-start">熵之廚刀</h3>
+                    <img src="images/scene-pro.jpg" alt="熵之廚刀實拍照" class="w-full h-64 object-cover rounded-xl mb-6 shadow-inner">
+                    <ul class="space-y-4 text-gray-700 flex-grow">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>刀刃不傷手：</strong> 特殊安全刃口設計，降低備料割傷風險。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>簡單易磨：</strong> 搭配專利磨刀器，磨刀像削鉛筆般輕鬆。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>抗菌防霉 99.999%：</strong> 刀身本質抗菌，永久有效。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>安全無火花：</strong> 碰撞不產生危險火花，取代傳統含鈹工具。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>傳家耐用：</strong> 高韌性與硬度完美結合，切斬俐落防斷裂。</span></li>
+                    </ul>
+                </div>
+
+                <!-- 熵之砧板 -->
+                <div class="bg-white border border-gray-100 p-8 rounded-2xl shadow-lg flex flex-col">
+                    <h3 class="text-2xl font-black text-copper-dark border-b-2 border-copper inline-block pb-2 mb-6 self-start">熵之砧板</h3>
+                    <img src="images/detail-edge.jpg" alt="熵之砧板實拍照" class="w-full h-64 object-cover rounded-xl mb-6 shadow-inner">
+                    <ul class="space-y-4 text-gray-700 flex-grow">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>抗菌防霉 99.999%：</strong> 徹底告別傳統木砧板的黑斑與霉菌。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>快速解凍：</strong> 導熱極佳，大幅縮短冷凍食材退冰時間。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>健康無塑膠微粒：</strong> 切割不掉屑，微塑膠徹底趕出餐桌。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>不傷愛刀：</strong> 硬度完美匹配，不像不鏽鋼砧板硬碰硬傷刀。</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i> <span><strong>不留異味：</strong> 切完海鮮肉類，清水一沖即可去味。</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 磨刀器 Spotlight -->
+            <div class="bg-copper-dark text-white rounded-2xl p-8 text-center max-w-3xl mx-auto shadow-xl">
+                <i class="fa-solid fa-screwdriver-wrench text-4xl mb-4 text-copper-light"></i>
+                <h3 class="text-2xl font-bold mb-3">專屬設計・專利磨刀器</h3>
+                <p class="text-lg text-gray-200">主打理念：<strong class="text-white text-xl">「讓磨刀，就像削鉛筆一樣輕鬆優雅。」</strong></p>
+                <p class="text-sm text-gray-300 mt-2">由葉老師親自設計，無須專業技巧，輕滑幾下瞬間恢復極致鋒利。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 材質比較表 ===== -->
+    <section id="comparison" class="py-20 bg-white px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4">不怕比較，因為每個細節都做到極致</h2>
+            <p class="text-center text-gray-500 mb-12">市售常見材質大比拼，一張表看清楚優劣</p>
+            
+            <!-- 廚刀比較 -->
+            <h3 class="text-xl font-bold text-copper-dark mb-4 pl-2 border-l-4 border-copper">🔪 廚刀材質比較</h3>
+            <div class="overflow-x-auto shadow-lg rounded-xl mb-16 border border-gray-200">
+                <table class="w-full text-left border-collapse bg-white whitespace-nowrap text-sm">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-800">
+                            <th class="p-4 font-bold border-r border-gray-200">比較指標</th>
+                            <th class="p-4 font-bold text-copper-dark bg-copper/10 border-r border-gray-200 text-base">⭐ 熵銅合金廚刀</th>
+                            <th class="p-4 font-normal">傳統不鏽鋼刀</th>
+                            <th class="p-4 font-normal">陶瓷刀</th>
+                            <th class="p-4 font-normal">碳鋼刀</th>
+                            <th class="p-4 font-normal">鈦合金刀</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">1. 刀刃不傷手</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 特殊安全刃口設計</td><td class="p-4">普通</td><td class="p-4 text-red-500">碎裂風險傷人</td><td class="p-4">普通</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">2. 簡單易磨</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 如削鉛筆般輕鬆</td><td class="p-4">需一定技巧</td><td class="p-4 text-red-500">✕ 無法自行磨刀</td><td class="p-4">需技巧</td><td class="p-4">需特殊工具</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">3. 抗菌防霉</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 本質抗菌 99.999%</td><td class="p-4">無特殊功能</td><td class="p-4">普通</td><td class="p-4 text-red-500">易生鏽藏菌</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">4. 安全無火花</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 絕不產生火花</td><td class="p-4 text-yellow-600">⚠️ 有火花風險</td><td class="p-4">無風險</td><td class="p-4 text-yellow-600">⚠️ 有火花風險</td><td class="p-4 text-yellow-600">⚠️ 有火花風險</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">5. 無毒無鈹</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 無鈹・無重金屬</td><td class="p-4">佳</td><td class="p-4">佳</td><td class="p-4">普通</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">6. 持久鋒利度</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 高硬度高韌性</td><td class="p-4 text-yellow-600">需頻繁磨刀</td><td class="p-4 text-red-500">易脆裂不耐摔</td><td class="p-4">佳但易鏽</td><td class="p-4">普通</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">7. 抗鏽防腐</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 優異抗腐蝕力</td><td class="p-4 text-yellow-600">部分鋼種易鏽</td><td class="p-4">佳</td><td class="p-4 text-red-500">差 (極易生鏽)</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">8. 傳家耐用度</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 傳家寶等級</td><td class="p-4">佳</td><td class="p-4 text-red-500">差 (易碎需替換)</td><td class="p-4">普通</td><td class="p-4">佳</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 砧板比較 -->
+            <h3 class="text-xl font-bold text-copper-dark mb-4 pl-2 border-l-4 border-copper">🪵 砧板材質比較</h3>
+            <div class="overflow-x-auto shadow-lg rounded-xl border border-gray-200">
+                <table class="w-full text-left border-collapse bg-white whitespace-nowrap text-sm">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-800">
+                            <th class="p-4 font-bold border-r border-gray-200">比較指標</th>
+                            <th class="p-4 font-bold text-copper-dark bg-copper/10 border-r border-gray-200 text-base">⭐ 熵銅合金砧板</th>
+                            <th class="p-4 font-normal">傳統不鏽鋼砧板</th>
+                            <th class="p-4 font-normal">木質砧板</th>
+                            <th class="p-4 font-normal">塑膠砧板</th>
+                            <th class="p-4 font-normal">純鈦砧板</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">1. 抗菌防霉力</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 本質抗菌 99.999%</td><td class="p-4">無特殊功能</td><td class="p-4 text-red-500">極易發霉長黑斑</td><td class="p-4 text-red-500">刀痕藏污易長菌</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">2. 健康無塑膠微粒</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 絕對零微塑膠</td><td class="p-4">無微粒</td><td class="p-4 text-yellow-600">會掉木屑</td><td class="p-4 text-red-500">⚠️ 釋出大量微塑膠</td><td class="p-4">無微粒</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">3. 不傷刀刃</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 完美硬度匹配</td><td class="p-4 text-red-500">⚠️ 硬碰硬極傷刀</td><td class="p-4">保護刀刃</td><td class="p-4 text-yellow-600">深痕難洗</td><td class="p-4 text-red-500">易傷刀/留深痕</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">4. 快速解凍</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 極快 (高導熱)</td><td class="p-4 text-yellow-600">慢 (導熱差)</td><td class="p-4 text-red-500">✕ 無此功能</td><td class="p-4 text-red-500">✕ 無此功能</td><td class="p-4">普通</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">5. 安全無火花</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 絕不產生火花</td><td class="p-4 text-yellow-600">⚠️ 有火花風險</td><td class="p-4">無風險</td><td class="p-4">無風險</td><td class="p-4 text-yellow-600">⚠️ 有火花風險</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">6. 無毒無有害物質</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 通過嚴格食安認證</td><td class="p-4">佳</td><td class="p-4 text-yellow-600">可能含防腐/漂白劑</td><td class="p-4 text-red-500">⚠️ 塑化劑風險</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">7. 清潔便利性</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 清水一沖去異味</td><td class="p-4">佳</td><td class="p-4 text-red-500">需抹油/難去異味</td><td class="p-4 text-yellow-600">刀痕易藏污納垢</td><td class="p-4">佳</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-4 font-bold bg-gray-50">8. 傳家耐用度</td>
+                            <td class="p-4 font-bold text-green-600 bg-copper/5">✅ 傳家寶等級</td><td class="p-4">佳</td><td class="p-4 text-red-500">需定期汰換</td><td class="p-4 text-red-500">需定期汰換</td><td class="p-4">佳</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="py-20 bg-gray-50 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">關於熵之刀砧，您可能想知道...</h2>
+            
+            <div class="space-y-4">
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        「熵」這個字怎麼念？是什麼意思？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        <strong>熵，讀音同「商」（ㄕㄤ）</strong>。這是物理學中描述「混亂程度」的概念。台灣清華大學葉均蔚教授在 1995 年發現：把多種金屬元素以近似等量混合，這種「高混亂度」反而讓金屬產生超乎尋常的硬度與抗菌力，從此開創了全新材料領域。
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        產品叫「熵銅合金」還是「高熵銅合金」？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        正確名稱為<strong>「高熵銅合金」</strong>。本產品以銅為主要元素，融入高熵合金的設計觀念開發而成。依材料學的嚴格定義，屬於「中熵合金（Medium-Entropy Alloy）」；但就產品精神與技術傳承而言，源自葉院士的高熵合金革命，因此以「高熵銅合金」稱之。
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        市面上也有無火花工具，強調「無鈹」的優勢在哪？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        傳統無火花工具多以「鈹銅合金」製作，因為鈹能讓銅變硬且無火花。但<strong>鈹是強烈有毒重金屬</strong>，可能引發嚴重疾病。本產品開發出能同時達到「高硬度、無火花、高抗菌」的配方，完全取代含劇毒的鈹，對人體與食安絕對安全。
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        抗菌率 99.999% 是怎麼驗證的？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        我們依照國際標準 JIS Z2801 與 SGS 認證，由財團法人食品工業發展研究所及 SGS 雙重驗證，針對以下常見細菌進行測試，抗菌率均超過 99.9%，多數可達 99.999%：
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full font-bold">大腸桿菌</span>
+                            <span class="text-xs bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-bold">金黃球菌</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">綠膿桿菌</span>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">肺炎克雷伯菌</span>
+                            <span class="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-bold">沙門氏菌</span>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        金屬砧板切菜時，會傷刀刃嗎？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        這是不鏽鋼砧板最大的詬病，因為硬碰硬易導致刀刃磨損。而熵之砧板的硬度特別調校在 <strong>HV 280+</strong>，能與大多數廚刀完美匹配，正常使用下不傷刀鋒。
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        抗菌效果用久了會消退嗎？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        不會。市面產品多是噴塗抗菌劑，久了會磨損脫落。熵銅合金是「<strong>本質抗菌</strong>」，從內部到表面每一個分子都有抗菌能力，就算表面被刀劃過，露出的新表面依然具備抗菌力，永久有效。
+                    </div>
+                </details>
+
+                <details class="bg-white rounded-lg shadow-sm border border-gray-200 group">
+                    <summary class="font-bold cursor-pointer p-5 flex justify-between items-center text-lg text-gray-800">
+                        價格比傳統砧板高，真的值得嗎？
+                        <span class="text-copper group-open:rotate-180 transition-transform"><i class="fa-solid fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="p-5 pt-0 text-gray-600 border-t border-gray-100 mt-2 pt-4 leading-relaxed">
+                        若以「長期投資」來看，塑膠與木砧板每半年至一年就該汰換。<strong>熵之刀砧一次購買、終身使用</strong>，為全家人省下無價的健康成本，長期 CP 值絕對是最高的。
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA 購買通路 ===== -->
+    <section id="cta" class="py-20 bg-gray-900 text-white px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl font-black mb-4">立即升級您的廚房體驗</h2>
+            <p class="text-xl text-copper-light mb-10">🛡️ 官方承諾：享 7 天鑑賞期，購物安心有保障</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <a href="#" class="bg-white/10 hover:bg-white/20 p-6 rounded-xl transition flex flex-col items-center">
+                    <i class="fa-brands fa-line text-4xl text-green-400 mb-3"></i>
+                    <span class="font-bold">LINE 官方客服</span>
+                    <span class="text-xs text-gray-400 mt-1">專人為您服務</span>
+                </a>
+                <a href="#" class="bg-white/10 hover:bg-white/20 p-6 rounded-xl transition flex flex-col items-center">
+                    <i class="fa-solid fa-cart-shopping text-4xl text-copper mb-3"></i>
+                    <span class="font-bold">線上購物車</span>
+                    <span class="text-xs text-gray-400 mt-1">官網直接結帳</span>
+                </a>
+                <a href="#" class="bg-white/10 hover:bg-white/20 p-6 rounded-xl transition flex flex-col items-center">
+                    <i class="fa-solid fa-store text-4xl text-orange-500 mb-3"></i>
+                    <span class="font-bold">蝦皮賣場</span>
+                    <span class="text-xs text-gray-400 mt-1">習慣的購物平台</span>
+                </a>
+                <a href="tel:0800002789" class="bg-white/10 hover:bg-white/20 p-6 rounded-xl transition flex flex-col items-center">
+                    <i class="fa-solid fa-phone text-4xl text-blue-400 mb-3"></i>
+                    <span class="font-bold">0800-002-789</span>
+                    <span class="text-xs text-gray-400 mt-1">免付費客服專線</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-black text-gray-500 py-8 text-center text-sm">
+        <p>&copy; 2026 熵之刀砧 Entropy Cutting Board & Knife. All rights reserved.</p>
+        <p class="mt-2">技術研發：清華大學葉均蔚教授團隊 | 台灣設計製造</p>
+        <p class="mt-1 text-xs text-gray-600">本頁面所述抗菌數據依據 SGS JIS Z2801 及食研所 JIS Z2801 測試報告</p>
+    </footer>
+
+</body>
+</html>
