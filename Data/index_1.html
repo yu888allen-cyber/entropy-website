@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熵之刀砧 — EM-700 高熵合金廚房工具</title>
+    <meta name="description" content="熵之刀砧以 EM-700 高熵合金打造，本質抗菌、無火花、高導熱，重新定義廚房材料科技。終身保固，終身抗菌。">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;500;700;800&display=swap');
+
+        /* ===== 設計系統 ===== */
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #111111;
+            --bg-card: #1A1A1A;
+            --text-primary: #F5F5F5;
+            --text-secondary: #A0A0A0;
+            --accent-gold: #C9A84C;
+            --accent-orange: #E8521A;
+            --border: rgba(255, 255, 255, 0.08);
+            --font-cn: 'Noto Sans TC', sans-serif;
+            --font-en: 'Inter', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-cn);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== 滾動淡入動畫 ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== 共用佈局 ===== */
+        .section-padding {
+            padding: 100px 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+        }
+
+        /* ===== SECTION 1 — 導覽列 ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ===== SECTION 2 — HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('images/hero.jpg') center/cover no-repeat;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.65) 0%,
+                    rgba(0, 0, 0, 0.55) 50%,
+                    rgba(0, 0, 0, 0.80) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 24px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--accent-gold);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-content .hero-desc {
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: var(--accent-orange);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: var(--font-cn);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 82, 26, 0.35);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, background 0.3s;
+            font-family: var(--font-cn);
+        }
+
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-outline-gray {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 36px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s, color 0.3s;
+            font-family: var(--font-cn);
+        }
+
+        .btn-outline-gray:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: var(--text-primary);
+        }
+
+        /* 滾動箭頭 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 28px;
+            height: 28px;
+            stroke: rgba(255, 255, 255, 0.5);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-12px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-6px);
+            }
+        }
+
+        /* ===== SECTION 3 — 產品價值主張 ===== */
+        .value-props {
+            background: #0F0F0F;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 36px 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .value-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .value-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ===== SECTION 4 — 材料科技段 ===== */
+        .material-section {
+            background: var(--bg-primary);
+        }
+
+        .material-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .material-text .big-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .material-text .gold-sub {
+            color: var(--accent-gold);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .material-text .desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            padding: 8px 18px;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .material-img img {
+            border-radius: 16px;
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+        }
+
+        /* ===== SECTION 5 — 三大核心優勢 ===== */
+        .advantages {
+            background: var(--bg-secondary);
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .adv-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 40px 28px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+
+        .adv-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .adv-card .icon {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+        }
+
+        .adv-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .adv-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        /* ===== SECTION 6 — 產品細節 ===== */
+        .details-section {
+            background: var(--bg-primary);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .detail-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .detail-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .detail-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .detail-item .label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ===== SECTION 7 — 應用場景 ===== */
+        .scenes {
+            background: #0F0F0F;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scene-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .scene-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .scene-card .scene-info {
+            padding: 24px;
+        }
+
+        .scene-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .scene-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* ===== SECTION 8 — 影片段 ===== */
+        .video-section {
+            background: var(--bg-primary);
+        }
+
+        .video-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== SECTION 9 — 規格摘要 ===== */
+        .specs {
+            background: var(--bg-secondary);
+        }
+
+        .spec-table {
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .spec-row {
+            display: flex;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            width: 35%;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            font-weight: 500;
+            flex-shrink: 0;
+        }
+
+        .spec-value {
+            width: 65%;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== SECTION 10 — 品牌信任 ===== */
+        .trust {
+            background: var(--bg-primary);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .trust-text .big-title {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .trust-text .desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .trust-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .trust-pill {
+            padding: 8px 20px;
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            color: var(--accent-gold);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .professor-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 48px 36px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .professor-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid rgba(201, 168, 76, 0.3);
+        }
+
+        .professor-card .name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .professor-card .role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .professor-card .award {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .professor-card .bio {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        /* ===== SECTION 11 — CTA 收口 ===== */
+        .cta-section {
+            background: #050505;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section .cta-desc {
+            color: var(--text-secondary);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== SECTION 12 — FOOTER ===== */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .brand-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .footer-brand .brand-sub {
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-contact {
+            text-align: right;
+        }
+
+        .footer-contact .phone-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .footer-contact .phone {
+            font-family: var(--font-en);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #606060;
+            font-size: 0.82rem;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ===== 響應式 ===== */
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 64px 16px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .value-card {
+                padding: 24px 16px;
+            }
+
+            .material-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .material-img img {
+                height: 300px;
+            }
+
+            .adv-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item img {
+                height: 220px;
+            }
+
+            .scene-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .spec-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .spec-label {
+                width: 100%;
+                font-size: 0.82rem;
+            }
+
+            .spec-value {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-contact {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== SECTION 1 — 導覽列 ===== -->
+    <nav class="nav" id="navbar">
+        <a href="#" class="nav-logo">熵之刀砧</a>
+        <ul class="nav-links">
+            <li><a href="#product">產品介紹</a></li>
+            <li><a href="#material">材料技術</a></li>
+            <li><a href="#contact">聯絡我們</a></li>
+        </ul>
+        <button class="hamburger" id="hamburgerBtn" aria-label="選單">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#product" onclick="closeMobile()">產品介紹</a>
+        <a href="#material" onclick="closeMobile()">材料技術</a>
+        <a href="#contact" onclick="closeMobile()">聯絡我們</a>
+    </div>
+
+    <!-- ===== SECTION 2 — HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>熵之刀砧</h1>
+            <p class="subtitle">重新定義廚房材料科技</p>
+            <p class="hero-desc">以 EM-700 高熵合金工程，打造兼具本質抗菌、耐磨穩定、無火花安全與高質感設計的下一代廚房工具。</p>
+            <div class="hero-buttons">
+                <a href="#video" class="btn-primary">▶ 觀看產品影片</a>
+                <a href="#material" class="btn-outline">了解材料技術</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <polyline points="6 9 12 15 18 9" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3 — 產品價值主張 ===== -->
+    <section class="value-props section-padding" id="product">
+        <div class="container">
+            <h2 class="section-title fade-up">不只是砧板，而是材料升級後的使用體驗</h2>
+            <div class="value-grid">
+                <div class="value-card fade-up">
+                    <div class="icon">🛡️</div>
+                    <h3>更安全</h3>
+                    <p>本質抗菌，細菌無處藏身，無需擔心化學塗層脫落。</p>
+                </div>
+                <div class="value-card fade-up">
+                    <div class="icon">💎</div>
+                    <h3>更耐用</h3>
+                    <p>HV≥280 硬度，長期使用仍維持穩定表現。</p>
+                </div>
+                <div class="value-card fade-up">
+                    <div class="icon">⚡</div>
+                    <h3>更省時</h3>
+                    <p>高導熱特性，冷凍肉退冰速度提升 50%。</p>
+                </div>
+                <div class="value-card fade-up">
+                    <div class="icon">✨</div>
+                    <h3>更乾淨</h3>
+                    <p>金屬表面無縫隙，沖水即潔，不留異味。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4 — 材料科技段 ===== -->
+    <section class="material-section section-padding" id="material">
+        <div class="container">
+            <div class="material-grid">
+                <div class="material-text fade-up">
+                    <h2 class="big-title">EM-700 高熵合金材料科技</h2>
+                    <p class="gold-sub">五種以上主元素均勻混合，突破單一基體限制</p>
+                    <p class="desc">傳統廚房工具只是工具。EM-700
+                        高熵合金，是材料科學的突破。多元素配方創造出獨特晶格穩定結構，帶來前所未有的耐磨、抗蝕、抗菌與無火花特性，遠超傳統不鏽鋼、木質或塑膠砧板的表現上限。</p>
+                    <div class="pills">
+                        <span class="pill">多主元素固溶體</span>
+                        <span class="pill">高硬度耐磨耗</span>
+                        <span class="pill">高耐蝕無火花</span>
+                        <span class="pill">本質抗菌</span>
+                        <span class="pill">熱穩定</span>
+                    </div>
+                </div>
+                <div class="material-img fade-up">
+                    <img src="images/material.jpg" alt="EM-700 高熵合金材料" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 5 — 三大核心優勢 ===== -->
+    <section class="advantages section-padding">
+        <div class="container">
+            <h2 class="section-title fade-up">為高標準使用環境而設計</h2>
+            <div class="adv-grid">
+                <div class="adv-card fade-up">
+                    <div class="icon">🦠</div>
+                    <h3>本質抗菌</h3>
+                    <p>抗菌效果來自合金配方本身，不是表面塗層。長期使用、反覆清洗，抗菌功能永不衰退。</p>
+                </div>
+                <div class="adv-card fade-up">
+                    <div class="icon">🔥</div>
+                    <h3>無火花安全</h3>
+                    <p>在瓦斯爐旁使用完全安全，獨特合金配方不產生火花，杜絕廚房安全隱患。</p>
+                </div>
+                <div class="adv-card fade-up">
+                    <div class="icon">❄️</div>
+                    <h3>快速退冰</h3>
+                    <p>高導熱性讓冷凍肉品退冰時間縮短 50%，保留食材鮮度，讓料理準備更有效率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 6 — 產品細節 ===== -->
+    <section class="details-section section-padding">
+        <div class="container">
+            <h2 class="section-title fade-up">每一處細節，都源自材料與工藝的共同設計</h2>
+            <p class="section-subtitle fade-up">刀具與砧板採用同等級高熵合金，硬度精確匹配設計，讓刀刃不崩、砧面不刮傷。</p>
+            <div class="detail-grid">
+                <div class="detail-item fade-up">
+                    <img src="images/detail-surface.jpg" alt="表面紋理" loading="lazy">
+                    <div class="label">表面紋理</div>
+                </div>
+                <div class="detail-item fade-up">
+                    <img src="images/detail-edge.jpg" alt="邊角細節" loading="lazy">
+                    <div class="label">邊角細節</div>
+                </div>
+                <div class="detail-item fade-up">
+                    <img src="images/detail-thickness.jpg" alt="厚度截面" loading="lazy">
+                    <div class="label">厚度截面</div>
+                </div>
+                <div class="detail-item fade-up">
+                    <img src="images/detail-engraving.jpg" alt="品牌刻印" loading="lazy">
+                    <div class="label">品牌刻印</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 7 — 應用場景 ===== -->
+    <section class="scenes section-padding">
+        <div class="container">
+            <h2 class="section-title fade-up">適用多元場景，從日常到高規格環境</h2>
+            <div class="scene-grid">
+                <div class="scene-card fade-up">
+                    <img src="images/scene-home.jpg" alt="家庭廚房" loading="lazy">
+                    <div class="scene-info">
+                        <h3>家庭廚房</h3>
+                        <p>每天使用，無需擔心保養，清水即潔，守護家人健康。</p>
+                    </div>
+                </div>
+                <div class="scene-card fade-up">
+                    <img src="images/scene-pro.jpg" alt="專業料理" loading="lazy">
+                    <div class="scene-info">
+                        <h3>專業料理</h3>
+                        <p>高頻使用環境，材料穩定性確保刀具與砧板同步維持最佳狀態。</p>
+                    </div>
+                </div>
+                <div class="scene-card fade-up">
+                    <img src="images/scene-food.jpg" alt="食品加工" loading="lazy">
+                    <div class="scene-info">
+                        <h3>食品加工</h3>
+                        <p>符合衛生標準，抗菌表面、耐蝕材質，適合高規格食品接觸環境。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 8 — 影片段 ===== -->
+    <section class="video-section section-padding" id="video">
+        <div class="container">
+            <h2 class="section-title fade-up">觀看產品介紹影片</h2>
+            <p class="section-subtitle fade-up">用幾分鐘快速了解 EM-700 高熵合金的材料特性、工藝細節與真實使用情境。</p>
+            <div class="video-wrapper fade-up">
+                <iframe src="https://www.youtube.com/embed/Xy9FV7nP1i8" title="熵之刀砧產品介紹"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 9 — 規格摘要 ===== -->
+    <section class="specs section-padding">
+        <div class="container">
+            <h2 class="section-title fade-up">產品規格</h2>
+            <div class="spec-table fade-up">
+                <div class="spec-row">
+                    <div class="spec-label">材料</div>
+                    <div class="spec-value">EM-700 高熵合金（五種以上主元素）</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">硬度</div>
+                    <div class="spec-value">Vickers HV ≥ 280</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">抗菌特性</div>
+                    <div class="spec-value">本質抗菌（非塗層），符合食品接觸材料規範</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">表面處理</div>
+                    <div class="spec-value">無縫金屬表面，不吸味、不藏菌</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">導熱性能</div>
+                    <div class="spec-value">高導熱，退冰速度較傳統砧板提升約 50%</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">火花安全</div>
+                    <div class="spec-value">無火花設計，廚房使用安全</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">產品線</div>
+                    <div class="spec-value">熵之刀（廚刀）× 熵之砧（砧板）</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">保固</div>
+                    <div class="spec-value">終身保固（結構性破裂無條件換新）</div>
+                </div>
+                <div class="spec-row">
+                    <div class="spec-label">服務</div>
+                    <div class="spec-value">365 無憂維修 + 五年免費整新</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 10 — 品牌信任 ===== -->
+    <section class="trust section-padding">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-text fade-up">
+                    <h2 class="big-title">材料科技，不應只停留在實驗室</h2>
+                    <p class="desc">我們相信，真正的高端材料應該進入日常生活。EM-700 高熵合金由葉均蔚院士研究團隊開發，歷經多年學術驗證，現在以熵之刀砧的形式，讓每個廚房都能感受到材料科學的力量。
+                    </p>
+                    <div class="trust-pills">
+                        <span class="trust-pill">長壽命設計</span>
+                        <span class="trust-pill">高可靠</span>
+                        <span class="trust-pill">ESG 永續</span>
+                    </div>
+                </div>
+                <div class="professor-card fade-up">
+                    <img src="images/professor.jpg" alt="葉均蔚院士" loading="lazy">
+                    <div class="name">葉均蔚 院士</div>
+                    <div class="role">清華大學材料科學教授</div>
+                    <div class="award">2025 總統科學獎得主</div>
+                    <div class="bio">高熵合金研究先驅・學術成果轉譯產業應用</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 11 — CTA 收口 ===== -->
+    <section class="cta-section section-padding" id="contact">
+        <div class="container">
+            <h2 class="fade-up">準備好升級你的廚房了嗎？</h2>
+            <p class="cta-desc fade-up">體驗高熵合金帶來的材料科技革命，從每一次切割開始。</p>
+            <div class="cta-buttons fade-up">
+                <a href="#video" class="btn-primary">▶ 觀看產品影片</a>
+                <a href="#product" class="btn-outline">查看完整產品介紹</a>
+                <a href="tel:0800002789" class="btn-outline-gray">聯絡我們</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 12 — FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-name">熵之刀砧</div>
+                <div class="brand-sub">× EM-700</div>
+            </div>
+            <div class="footer-nav">
+                <a href="#product">產品介紹</a>
+                <a href="#material">材料技術</a>
+                <a href="#contact">聯絡我們</a>
+            </div>
+            <div class="footer-contact">
+                <div class="phone-label">客服專線</div>
+                <div class="phone">0800-002-789</div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            材料科技，讓廚房安全升級。© 2025 熵之刀砧
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        /* 漢堡選單 */
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        function closeMobile() {
+            mobileMenu.classList.remove('active');
+        }
+
+        /* IntersectionObserver 滾動淡入 */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        /* 導覽列滾動增強 */
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const currentScroll = window.scrollY;
+            if (currentScroll > 80) {
+                nav.style.background = 'rgba(10,10,10,0.92)';
+            } else {
+                nav.style.background = 'rgba(10,10,10,0.75)';
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+    </script>
+</body>
+
+</html>

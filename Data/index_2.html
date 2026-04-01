@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熵之刀砧 — 用新思維守護家人</title>
+    <meta name="description" content="2025總統科學獎得主葉均蔚院士研發。高熵銅合金本質抗菌 99.999%，安全無火花、無鈹無毒——世代傳家的廚房材料科技。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== DESIGN SYSTEM ===== */
+        :root {
+            --color-bg: #fafaf8;
+            --color-bg-alt: #f4f3f0;
+            --color-bg-dark: #141414;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #6b6b6b;
+            --color-text-tertiary: #999;
+            --color-border: #e8e6e3;
+            --color-border-light: #f0eeeb;
+            --color-copper: #b87333;
+            --color-copper-light: #d4a574;
+            --color-copper-subtle: rgba(184,115,51,0.08);
+            --color-white: #ffffff;
+            --color-green: #2d8a4e;
+            --color-red: #c53030;
+            --color-yellow: #b7791f;
+            --font-sans: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Helvetica Neue", sans-serif;
+            --max-w: 1200px;
+            --max-w-narrow: 720px;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 32px;
+            --space-xl: 64px;
+            --space-2xl: 96px;
+            --space-3xl: 140px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-bg);
+            font-size: 17px;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ===== TYPOGRAPHY ===== */
+        .t-hero { font-size: clamp(44px, 8vw, 88px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; }
+        .t-h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; letter-spacing: -0.025em; }
+        .t-h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+        .t-h3 { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; line-height: 1.3; letter-spacing: -0.015em; }
+        .t-body { font-size: 17px; line-height: 1.7; }
+        .t-body-lg { font-size: 19px; line-height: 1.7; }
+        .t-caption { font-size: 14px; line-height: 1.5; color: var(--color-text-secondary); }
+        .t-overline { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-copper); }
+
+        /* ===== LAYOUT ===== */
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+        .container-narrow { max-width: var(--max-w-narrow); margin: 0 auto; padding: 0 24px; }
+        .section { padding: var(--space-3xl) 0; }
+        .section-sm { padding: var(--space-2xl) 0; }
+        .text-center { text-align: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: start; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: var(--space-lg); } }
+
+        /* ===== ANIMATIONS ===== */
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(250,250,248,0.85); backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid transparent;
+            transition: border-color var(--transition);
+        }
+        .nav.scrolled { border-bottom-color: var(--color-border); }
+        .nav-inner {
+            max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between; height: 56px;
+        }
+        .nav-brand { font-size: 18px; font-weight: 700; letter-spacing: 0.04em; color: var(--color-text); }
+        .nav-brand span { color: var(--color-copper); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            font-size: 14px; font-weight: 500; color: var(--color-text-secondary);
+            transition: color var(--transition);
+        }
+        .nav-links a:hover { color: var(--color-text); }
+        .nav-cta {
+            font-size: 13px; font-weight: 600; padding: 8px 20px;
+            background: var(--color-text); color: var(--color-white);
+            border-radius: 100px; transition: all var(--transition);
+        }
+        .nav-cta:hover { background: var(--color-copper); }
+        .nav-mobile-btn { display: none; background: none; border: none; font-size: 20px; color: var(--color-text); cursor: pointer; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-mobile-btn { display: block; }
+        }
+        .mobile-menu {
+            display: none; position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
+            background: rgba(250,250,248,0.98); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 99; padding: 32px 24px;
+        }
+        .mobile-menu.open { display: flex; flex-direction: column; gap: 0; }
+        .mobile-menu a {
+            display: block; padding: 20px 0; font-size: 18px; font-weight: 500;
+            color: var(--color-text); border-bottom: 1px solid var(--color-border-light);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+            background: linear-gradient(165deg, #1a1a1a 0%, #2a2520 40%, #1a1715 100%);
+        }
+        .hero-bg-img {
+            position: absolute; inset: 0; opacity: 0.35;
+            background: url('images/hero.jpg') center/cover no-repeat;
+        }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center;
+            padding: 120px 24px 80px; max-width: 900px; margin: 0 auto;
+        }
+        .hero-overline {
+            display: inline-block; font-size: 13px; font-weight: 500;
+            color: var(--color-copper-light); letter-spacing: 0.05em;
+            margin-bottom: 28px; opacity: 0.9;
+        }
+        .hero-title { color: #fff; margin-bottom: 24px; }
+        .hero-title .accent { color: var(--color-copper-light); }
+        .hero-subtitle {
+            font-size: clamp(17px, 2.2vw, 21px); color: rgba(255,255,255,0.6);
+            font-weight: 300; line-height: 1.6; max-width: 560px; margin: 0 auto 48px;
+        }
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 14px 36px; background: var(--color-copper);
+            color: #fff; font-size: 15px; font-weight: 600;
+            border-radius: 100px; transition: all var(--transition);
+            border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--color-copper-light); transform: translateY(-1px); }
+        .btn-secondary {
+            padding: 14px 36px; background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500;
+            border-radius: 100px; border: 1px solid rgba(255,255,255,0.15);
+            transition: all var(--transition); cursor: pointer;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .hero-badges {
+            display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+            margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .hero-badge {
+            font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 400;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .hero-badge i { color: var(--color-copper-light); font-size: 14px; }
+
+        /* ===== INTRO / ENTROPY ===== */
+        .intro-card {
+            background: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: clamp(32px, 5vw, 56px);
+            box-shadow: var(--shadow-sm);
+        }
+        .intro-note {
+            background: var(--color-bg-alt); border-radius: var(--radius-sm);
+            padding: 16px 20px; font-size: 14px; color: var(--color-text-secondary);
+            line-height: 1.6; margin-top: 28px;
+        }
+
+        /* ===== VIDEO ===== */
+        .video-section { background: var(--color-bg-dark); }
+        .video-wrap {
+            position: relative; padding-bottom: 56.25%; border-radius: var(--radius-lg);
+            overflow: hidden; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+        /* ===== EXPERT ===== */
+        .expert-card {
+            background: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: clamp(32px, 4vw, 48px);
+        }
+        .expert-avatar {
+            width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+            border: 2px solid var(--color-border); background: var(--color-bg-alt);
+        }
+        .expert-avatar-fallback {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: var(--color-bg-alt); border: 2px solid var(--color-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-tertiary); font-size: 28px;
+        }
+        .expert-stat {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 12px 0; border-bottom: 1px solid var(--color-border-light);
+        }
+        .expert-stat:last-child { border-bottom: none; }
+        .expert-stat i { color: var(--color-copper); font-size: 14px; margin-top: 3px; flex-shrink: 0; }
+        .scene-img {
+            border-radius: var(--radius-lg); overflow: hidden; position: relative;
+            background: linear-gradient(135deg, #374151, #1f2937); min-height: 400px;
+        }
+        .scene-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+        .scene-overlay {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            justify-content: flex-end; padding: clamp(24px, 4vw, 40px);
+            background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
+        }
+
+        /* ===== MATERIAL FEATURES ===== */
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media (max-width: 768px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
+        .feature-card {
+            padding: 28px 24px; border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); background: var(--color-white);
+            transition: all var(--transition);
+        }
+        .feature-card:hover { border-color: var(--color-copper-light); box-shadow: var(--shadow-md); }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--color-copper-subtle); color: var(--color-copper);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; margin-bottom: 16px;
+        }
+        .feature-card h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.55; }
+
+        /* ===== PRODUCTS ===== */
+        .product-card {
+            background: var(--color-white); border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg); overflow: hidden;
+            transition: box-shadow var(--transition);
+        }
+        .product-card:hover { box-shadow: var(--shadow-md); }
+        .product-img {
+            height: 280px; overflow: hidden; background: linear-gradient(135deg, var(--color-bg-alt), #e8e4df);
+        }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .product-card:hover .product-img img { transform: scale(1.03); }
+        .product-body { padding: clamp(24px, 3vw, 36px); }
+        .product-label {
+            font-size: 13px; font-weight: 600; color: var(--color-copper);
+            letter-spacing: 0.04em; margin-bottom: 12px;
+        }
+        .product-body h3 { font-size: 24px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.01em; }
+        .product-feature {
+            display: flex; gap: 12px; padding: 10px 0;
+            border-bottom: 1px solid var(--color-border-light);
+            font-size: 15px; line-height: 1.5;
+        }
+        .product-feature:last-child { border-bottom: none; }
+        .product-feature .dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--color-copper);
+            flex-shrink: 0; margin-top: 8px;
+        }
+        .sharpener-banner {
+            background: var(--color-bg-dark); border-radius: var(--radius-lg);
+            padding: clamp(40px, 5vw, 64px); text-align: center; color: #fff;
+            margin-top: var(--space-xl);
+        }
+        .sharpener-banner h3 { font-size: clamp(22px, 3vw, 32px); font-weight: 700; margin-bottom: 12px; }
+        .sharpener-banner p { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto; }
+        .sharpener-banner .highlight { color: var(--color-copper-light); font-weight: 600; }
+
+        /* ===== COMPARISON ===== */
+        .comparison-table {
+            width: 100%; border-collapse: collapse; font-size: 14px;
+            background: var(--color-white); border-radius: var(--radius-md); overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+        .comparison-table thead th {
+            padding: 16px 14px; font-weight: 600; text-align: left;
+            background: var(--color-bg-alt); border-bottom: 1px solid var(--color-border);
+            font-size: 13px; white-space: nowrap;
+        }
+        .comparison-table thead th.ours {
+            background: var(--color-copper-subtle); color: var(--color-copper);
+        }
+        .comparison-table tbody td {
+            padding: 14px 14px; border-bottom: 1px solid var(--color-border-light);
+            vertical-align: top; white-space: nowrap;
+        }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .comparison-table .row-label { font-weight: 600; color: var(--color-text); background: var(--color-bg); }
+        .comparison-table .ours { background: var(--color-copper-subtle); font-weight: 600; color: var(--color-green); }
+        .comparison-table .warn { color: var(--color-yellow); }
+        .comparison-table .bad { color: var(--color-red); }
+        .table-scroll { overflow-x: auto; border-radius: var(--radius-md); -webkit-overflow-scrolling: touch; }
+        .table-label {
+            font-size: 15px; font-weight: 600; color: var(--color-text);
+            margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+        }
+        .table-label span { color: var(--color-copper); }
+
+        /* ===== FAQ ===== */
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            padding: 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-item summary {
+            list-style: none; cursor: pointer; padding: 24px 0;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 17px; font-weight: 600; color: var(--color-text);
+            transition: color var(--transition);
+        }
+        .faq-item summary:hover { color: var(--color-copper); }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: '+'; font-size: 22px; font-weight: 300;
+            color: var(--color-text-tertiary); transition: transform var(--transition);
+            flex-shrink: 0; margin-left: 16px;
+        }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item .faq-answer {
+            padding-bottom: 24px; font-size: 16px; line-height: 1.7;
+            color: var(--color-text-secondary); max-width: 640px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+        .bacteria-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .bacteria-tag {
+            font-size: 12px; font-weight: 600; padding: 4px 12px;
+            border-radius: 100px; background: var(--color-bg-alt);
+            color: var(--color-text-secondary);
+        }
+
+        /* ===== CTA ===== */
+        .cta-section { background: var(--color-bg-dark); }
+        .cta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media (max-width: 768px) { .cta-grid { grid-template-columns: 1fr 1fr; } }
+        .cta-card {
+            text-align: center; padding: 32px 16px; border-radius: var(--radius-md);
+            border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03);
+            transition: all var(--transition); color: #fff;
+        }
+        .cta-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+        .cta-card i { font-size: 28px; margin-bottom: 12px; opacity: 0.7; }
+        .cta-card .cta-label { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .cta-card .cta-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--color-bg-dark); border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 0; text-align: center;
+        }
+        .footer p { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.8; }
+
+        /* ===== DIVIDER ===== */
+        .divider { height: 1px; background: var(--color-border); margin: 0; }
+
+        /* ===== UTILITY ===== */
+        .mb-xs { margin-bottom: var(--space-xs); }
+        .mb-sm { margin-bottom: var(--space-sm); }
+        .mb-md { margin-bottom: var(--space-md); }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mb-2xl { margin-bottom: var(--space-2xl); }
+        .color-secondary { color: var(--color-text-secondary); }
+        .color-copper { color: var(--color-copper); }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <div class="nav-brand"><span>熵</span>之刀砧</div>
+        <div class="nav-links">
+            <a href="#entropy">材料科技</a>
+            <a href="#expert">研發團隊</a>
+            <a href="#products">產品系列</a>
+            <a href="#comparison">材質比較</a>
+            <a href="#faq">常見問題</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <a href="#cta" class="nav-cta">立即選購</a>
+            <button class="nav-mobile-btn" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="選單">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#entropy" onclick="document.getElementById('mobileMenu').classList.remove('open')">材料科技</a>
+    <a href="#expert" onclick="document.getElementById('mobileMenu').classList.remove('open')">研發團隊</a>
+    <a href="#products" onclick="document.getElementById('mobileMenu').classList.remove('open')">產品系列</a>
+    <a href="#comparison" onclick="document.getElementById('mobileMenu').classList.remove('open')">材質比較</a>
+    <a href="#faq" onclick="document.getElementById('mobileMenu').classList.remove('open')">常見問題</a>
+    <a href="#cta" onclick="document.getElementById('mobileMenu').classList.remove('open')" style="color:var(--color-copper);font-weight:600;">立即選購</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-content">
+        <div class="hero-overline reveal">2025 總統科學獎得主・葉均蔚院士研發</div>
+        <h1 class="t-hero hero-title reveal reveal-delay-1">
+            <span class="accent">熵</span>之刀砧
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-2">
+            源自高熵合金之父的材料革命。<br>
+            本質抗菌、安全無毒，為家人打造傳家級的廚房體驗。
+        </p>
+        <div class="hero-ctas reveal reveal-delay-3">
+            <a href="#products" class="btn-primary">探索產品</a>
+            <a href="#video" class="btn-secondary">觀看影片</a>
+        </div>
+        <div class="hero-badges reveal reveal-delay-3">
+            <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> 抗菌 99.999%</div>
+            <div class="hero-badge"><i class="fa-solid fa-leaf"></i> 無鈹・無毒</div>
+            <div class="hero-badge"><i class="fa-solid fa-snowflake"></i> 快速解凍</div>
+            <div class="hero-badge"><i class="fa-solid fa-bolt-lightning"></i> 安全無火花</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 什麼是熵 ===== -->
+<section id="entropy" class="section" style="background:var(--color-white);">
+    <div class="container-narrow reveal">
+        <div class="t-overline mb-md">材料科技</div>
+        <h2 class="t-h1 mb-lg">「熵」是什麼？</h2>
+        <div class="intro-card">
+            <p class="t-body-lg color-secondary" style="margin-bottom:20px;">
+                <strong style="color:var(--color-text);">熵（ㄕㄤ，讀音同「商」）</strong>——熱力學中描述混亂程度的物理量。
+            </p>
+            <p class="t-body color-secondary" style="margin-bottom:20px;">
+                1995 年，清華大學葉均蔚教授逆向思考：將多種金屬元素以近似等量比例混合，會發生什麼？過去認為只會得到脆裂廢料；但實驗證明，高混亂度反而讓金屬彼此牽制融合，產生超乎尋常的<strong style="color:var(--color-text);">硬度、韌性、抗腐蝕與抗菌能力</strong>。
+            </p>
+            <p class="t-body color-secondary">
+                這就是高熵合金——一場從根本改寫材料規則的科學革命。
+            </p>
+            <div class="intro-note">
+                <strong>材料學定義：</strong>本產品以銅為主元素，融入高熵設計概念。依嚴格定義屬中熵合金（Medium-Entropy Alloy），完美具備高熵觀念的本質強效抗菌特性。行銷上統一以「高熵銅合金」稱呼，延續高熵之父的研發脈絡。
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 影片 ===== -->
+<section id="video" class="section video-section">
+    <div class="container" style="max-width:960px;" >
+        <div class="text-center reveal" style="margin-bottom:48px;">
+            <div class="t-overline mb-md" style="color:var(--color-copper-light);">研發哲學</div>
+            <h2 class="t-h2" style="color:#fff;">《熵之道》</h2>
+            <p style="color:rgba(255,255,255,0.45);margin-top:12px;">多元、包容、和諧、共創——造就永續的未來。</p>
+        </div>
+        <div class="video-wrap reveal reveal-delay-1">
+            <iframe src="https://www.youtube.com/embed/sfG160w9oIA" title="熵之道 — 高熵之父的研發哲學" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 專家背書 ===== -->
+<section id="expert" class="section" style="background:var(--color-white);">
+    <div class="container">
+        <div class="text-center reveal mb-xl">
+            <div class="t-overline mb-md">研發團隊</div>
+            <h2 class="t-h1">來自頂尖科學的廚房革命</h2>
+        </div>
+        <div class="grid-2 reveal">
+            <div class="expert-card">
+                <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+                    <div class="expert-avatar-fallback" id="profAvatar">
+                        <img src="images/professor.jpg" alt="葉均蔚院士" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';">
+                    </div>
+                    <div>
+                        <h3 style="font-size:22px;font-weight:700;">葉均蔚 院士</h3>
+                        <p class="t-caption" style="color:var(--color-copper);">高熵合金之父・1995 年發明</p>
+                    </div>
+                </div>
+                <div class="expert-stat"><i class="fa-solid fa-award"></i><span><strong>2025 總統科學獎</strong>・工程科學組</span></div>
+                <div class="expert-stat"><i class="fa-solid fa-earth-americas"></i><span>全球前 2% 頂尖科學家</span></div>
+                <div class="expert-stat"><i class="fa-solid fa-book-open"></i><span>權威期刊《Nature》特別專訪</span></div>
+                <div class="expert-stat"><i class="fa-solid fa-flask-vial"></i><span>SGS 及食品工業發展研究所雙重認證</span></div>
+            </div>
+            <div class="scene-img">
+                <img src="images/scene-food.jpg" alt="料理情境" onerror="this.style.display='none';">
+                <div class="scene-overlay">
+                    <h3 style="color:#fff;font-size:24px;font-weight:700;margin-bottom:8px;">守護家人的每一餐</h3>
+                    <p style="color:rgba(255,255,255,0.65);font-size:15px;">安心備料，從選擇正確的材質開始。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== 材料特性 ===== -->
+<section id="material" class="section">
+    <div class="container">
+        <div class="text-center reveal mb-xl">
+            <div class="t-overline mb-md">核心技術</div>
+            <h2 class="t-h1 mb-md">高熵銅合金</h2>
+            <p class="t-body color-secondary" style="max-width:520px;margin:0 auto;">告別艱澀的工業術語。<br>最純粹的健康與安全，帶入您的廚房。</p>
+        </div>
+        <div class="feature-grid reveal">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-atom"></i></div>
+                <h4>雞尾酒效應</h4>
+                <p>多種元素完美調和，創造超乎尋常的強韌與耐用度。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>本質抗菌 99.999%</h4>
+                <p>非表面塗層。材質本身即具備永久強效抑菌能力。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-certificate"></i></div>
+                <h4>SGS 雙重驗證</h4>
+                <p>通過 SGS 及財團法人食品工業發展研究所嚴格檢驗。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-ban"></i></div>
+                <h4>無毒無鈹</h4>
+                <p>不含劇毒「鈹」，不產生微塑膠，徹底守護食安。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 產品系列 ===== -->
+<section id="products" class="section" style="background:var(--color-white);">
+    <div class="container">
+        <div class="text-center reveal mb-xl">
+            <div class="t-overline mb-md">產品系列</div>
+            <h2 class="t-h1">為高標準使用環境而設計</h2>
+        </div>
+        <div class="grid-2 reveal">
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="images/scene-pro.jpg" alt="熵之廚刀" onerror="this.style.display='none';">
+                </div>
+                <div class="product-body">
+                    <div class="product-label">KITCHEN KNIFE</div>
+                    <h3>熵之廚刀</h3>
+                    <div class="product-feature"><div class="dot"></div><span><strong>刀刃不傷手</strong> — 特殊安全刃口設計，降低割傷風險</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>簡單易磨</strong> — 搭配專利磨刀器，如削鉛筆般輕鬆</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>本質抗菌</strong> — 刀身抗菌率達 99.999%，永久有效</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>安全無火花</strong> — 碰撞不產生危險火花</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>傳家耐用</strong> — 高韌性高硬度，切斬俐落不斷裂</span></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="images/detail-edge.jpg" alt="熵之砧板" onerror="this.style.display='none';">
+                </div>
+                <div class="product-body">
+                    <div class="product-label">CUTTING BOARD</div>
+                    <h3>熵之砧板</h3>
+                    <div class="product-feature"><div class="dot"></div><span><strong>本質抗菌</strong> — 告別木砧板的黑斑與霉菌</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>快速解凍</strong> — 高導熱，大幅縮短退冰時間</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>零微塑膠</strong> — 切割不掉屑，微塑膠不上餐桌</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>不傷愛刀</strong> — 硬度完美匹配，不像不鏽鋼傷刀</span></div>
+                    <div class="product-feature"><div class="dot"></div><span><strong>不留異味</strong> — 切完海鮮肉類，清水一沖即淨</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="sharpener-banner reveal">
+            <div class="t-overline mb-md" style="color:var(--color-copper-light);">專利配件</div>
+            <h3>葉均蔚院士親自設計・專利磨刀器</h3>
+            <p style="margin-top:12px;">讓磨刀，就像 <span class="highlight">削鉛筆一樣輕鬆優雅</span>。<br>無須專業技巧，輕滑幾下瞬間恢復極致鋒利。</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 材質比較 ===== -->
+<section id="comparison" class="section">
+    <div class="container">
+        <div class="text-center reveal mb-xl">
+            <div class="t-overline mb-md">材質比較</div>
+            <h2 class="t-h1 mb-md">每個細節，都做到極致</h2>
+            <p class="t-body color-secondary">市售常見材質一覽比較，清楚看見差異。</p>
+        </div>
+
+        <div class="reveal mb-2xl">
+            <div class="table-label"><span>🔪</span> 廚刀材質比較</div>
+            <div class="table-scroll">
+                <table class="comparison-table">
+                    <thead><tr><th>比較指標</th><th class="ours">熵銅合金廚刀</th><th>不鏽鋼刀</th><th>陶瓷刀</th><th>碳鋼刀</th><th>鈦合金刀</th></tr></thead>
+                    <tbody>
+                        <tr><td class="row-label">刀刃安全</td><td class="ours">✓ 安全刃口設計</td><td>普通</td><td class="bad">碎裂風險</td><td>普通</td><td>佳</td></tr>
+                        <tr><td class="row-label">磨刀難度</td><td class="ours">✓ 如削鉛筆輕鬆</td><td>需技巧</td><td class="bad">✕ 無法磨刀</td><td>需技巧</td><td>需特殊工具</td></tr>
+                        <tr><td class="row-label">抗菌力</td><td class="ours">✓ 本質抗菌 99.999%</td><td>無</td><td>普通</td><td class="bad">易鏽藏菌</td><td>佳</td></tr>
+                        <tr><td class="row-label">無火花</td><td class="ours">✓ 絕不產生火花</td><td class="warn">有風險</td><td>無風險</td><td class="warn">有風險</td><td class="warn">有風險</td></tr>
+                        <tr><td class="row-label">無毒性</td><td class="ours">✓ 無鈹・無重金屬</td><td>佳</td><td>佳</td><td>普通</td><td>佳</td></tr>
+                        <tr><td class="row-label">鋒利持久</td><td class="ours">✓ 高硬度高韌性</td><td class="warn">需頻繁磨</td><td class="bad">易脆裂</td><td>佳但易鏽</td><td>普通</td></tr>
+                        <tr><td class="row-label">抗鏽防腐</td><td class="ours">✓ 優異抗腐蝕</td><td class="warn">部分易鏽</td><td>佳</td><td class="bad">極易生鏽</td><td>佳</td></tr>
+                        <tr><td class="row-label">傳家耐用</td><td class="ours">✓ 傳家寶等級</td><td>佳</td><td class="bad">易碎需換</td><td>普通</td><td>佳</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="reveal">
+            <div class="table-label"><span>🪵</span> 砧板材質比較</div>
+            <div class="table-scroll">
+                <table class="comparison-table">
+                    <thead><tr><th>比較指標</th><th class="ours">熵銅合金砧板</th><th>不鏽鋼砧板</th><th>木質砧板</th><th>塑膠砧板</th><th>純鈦砧板</th></tr></thead>
+                    <tbody>
+                        <tr><td class="row-label">抗菌防霉</td><td class="ours">✓ 本質抗菌 99.999%</td><td>無</td><td class="bad">極易發霉</td><td class="bad">刀痕藏菌</td><td>佳</td></tr>
+                        <tr><td class="row-label">無微塑膠</td><td class="ours">✓ 絕對零微塑膠</td><td>無微粒</td><td class="warn">掉木屑</td><td class="bad">大量微塑膠</td><td>無微粒</td></tr>
+                        <tr><td class="row-label">不傷刀刃</td><td class="ours">✓ 完美硬度匹配</td><td class="bad">硬碰硬傷刀</td><td>保護刀刃</td><td class="warn">深痕難洗</td><td class="bad">易傷刀</td></tr>
+                        <tr><td class="row-label">快速解凍</td><td class="ours">✓ 極快（高導熱）</td><td class="warn">慢</td><td class="bad">✕ 無此功能</td><td class="bad">✕ 無此功能</td><td>普通</td></tr>
+                        <tr><td class="row-label">無火花</td><td class="ours">✓ 絕不產生火花</td><td class="warn">有風險</td><td>無風險</td><td>無風險</td><td class="warn">有風險</td></tr>
+                        <tr><td class="row-label">食安認證</td><td class="ours">✓ 通過嚴格認證</td><td>佳</td><td class="warn">可能含防腐劑</td><td class="bad">塑化劑風險</td><td>佳</td></tr>
+                        <tr><td class="row-label">清潔容易</td><td class="ours">✓ 清水沖即淨</td><td>佳</td><td class="bad">需抹油保養</td><td class="warn">刀痕藏污</td><td>佳</td></tr>
+                        <tr><td class="row-label">傳家耐用</td><td class="ours">✓ 傳家寶等級</td><td>佳</td><td class="bad">需定期換</td><td class="bad">需定期換</td><td>佳</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section" style="background:var(--color-white);">
+    <div class="container-narrow">
+        <div class="text-center reveal mb-xl">
+            <div class="t-overline mb-md">常見問題</div>
+            <h2 class="t-h1">您可能想知道</h2>
+        </div>
+        <div class="reveal">
+            <details class="faq-item"><summary>「熵」這個字怎麼念？</summary><div class="faq-answer"><strong>熵，讀音同「商」（ㄕㄤ）。</strong>這是物理學中描述「混亂程度」的概念。1995 年，葉均蔚教授發現：把多種金屬元素以近似等量混合，這種「高混亂度」反而讓金屬產生超乎尋常的硬度與抗菌力，開創了全新材料領域。</div></details>
+            <details class="faq-item"><summary>產品材料的正確名稱是什麼？</summary><div class="faq-answer">正確名稱為<strong>「高熵銅合金」</strong>。以銅為主要元素，融入高熵合金的設計觀念開發而成。依材料學嚴格定義屬「中熵合金」，但就技術傳承而言，源自葉院士的高熵合金革命，因此以「高熵銅合金」稱之。</div></details>
+            <details class="faq-item"><summary>強調「無鈹」的優勢在哪？</summary><div class="faq-answer">傳統無火花工具多以「鈹銅合金」製作。但<strong>鈹是強烈有毒重金屬</strong>，可能引發嚴重疾病。本產品開發出同時達到高硬度、無火花、高抗菌的配方，完全取代含劇毒的鈹，對人體與食安絕對安全。</div></details>
+            <details class="faq-item"><summary>抗菌率 99.999% 如何驗證？</summary><div class="faq-answer">依國際標準 JIS Z2801，由財團法人食品工業發展研究所及 SGS 雙重驗證，針對以下細菌測試，抗菌率均達 99.999%：<div class="bacteria-tags"><span class="bacteria-tag">大腸桿菌</span><span class="bacteria-tag">金黃球菌</span><span class="bacteria-tag">綠膿桿菌</span><span class="bacteria-tag">肺炎克雷伯菌</span><span class="bacteria-tag">沙門氏菌</span></div></div></details>
+            <details class="faq-item"><summary>金屬砧板會傷刀嗎？</summary><div class="faq-answer">不鏽鋼砧板確實會因硬碰硬導致刀刃磨損。而熵之砧板的硬度特別調校在 <strong>HV 280+</strong>，能與大多數廚刀完美匹配，正常使用不傷刀鋒。</div></details>
+            <details class="faq-item"><summary>抗菌效果會隨時間消退嗎？</summary><div class="faq-answer">不會。市面產品多是噴塗抗菌劑，久了會磨損脫落。高熵銅合金是<strong>本質抗菌</strong>——從內部到表面每個分子都有抗菌能力，即使表面被刀劃過，露出的新表面依然具備抗菌力，永久有效。</div></details>
+            <details class="faq-item"><summary>價格比傳統砧板高，值得嗎？</summary><div class="faq-answer">塑膠與木砧板每半年至一年就該汰換。<strong>熵之刀砧一次購買、終身使用</strong>，為全家人省下的是無價的健康成本。以長期投資來看，CP 值是所有材質中最高的。</div></details>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section id="cta" class="section cta-section">
+    <div class="container" style="max-width:800px;">
+        <div class="text-center reveal" style="margin-bottom:48px;">
+            <h2 class="t-h1" style="color:#fff;margin-bottom:16px;">開始體驗</h2>
+            <p style="color:rgba(255,255,255,0.45);font-size:16px;">7 天鑑賞期，購物安心有保障。</p>
+        </div>
+        <div class="cta-grid reveal">
+            <a href="#" class="cta-card"><i class="fa-brands fa-line" style="color:#06C755;"></i><div class="cta-label">LINE 客服</div><div class="cta-sub">專人服務</div></a>
+            <a href="#" class="cta-card"><i class="fa-solid fa-bag-shopping" style="color:var(--color-copper-light);"></i><div class="cta-label">線上選購</div><div class="cta-sub">官網結帳</div></a>
+            <a href="#" class="cta-card"><i class="fa-solid fa-store" style="color:#ee4d2d;"></i><div class="cta-label">蝦皮賣場</div><div class="cta-sub">熟悉平台</div></a>
+            <a href="tel:0800002789" class="cta-card"><i class="fa-solid fa-phone" style="color:#60a5fa;"></i><div class="cta-label">0800-002-789</div><div class="cta-sub">免付費專線</div></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="container">
+        <p style="font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:8px;">熵之刀砧</p>
+        <p>&copy; 2026 Entropy Cutting Board & Knife. All rights reserved.</p>
+        <p>技術研發：清華大學葉均蔚教授團隊｜台灣設計製造</p>
+        <p style="margin-top:8px;font-size:12px;">抗菌數據依據 SGS JIS Z2801 及食研所 JIS Z2801 測試報告</p>
+    </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// Scroll reveal
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Hero immediate reveal with stagger
+setTimeout(() => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 150);
+    });
+}, 200);
+</script>
+
+</body>
+</html>
